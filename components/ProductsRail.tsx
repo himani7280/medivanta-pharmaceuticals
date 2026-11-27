@@ -1,7 +1,7 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useEffect, useRef, useState, type MouseEvent } from "react";
+import { motion, useMotionValue, useScroll, useTransform } from "framer-motion";
+import { useEffect, useRef, useState, type MouseEvent, type UIEvent } from "react";
 import { HEADING_FONT_CLASS, HEADING_TITLE_MT, HOME, IMG, MONO_FONT_CLASS, PAGE_CONTAINER, PAGE_GUTTER, PAGE_MAX_WIDTH } from "@/data/data";
 import { ArrowUpRightIcon, NamedIcon } from "@/lib/icons";
 import { Stagger, StaggerItem, TiltCard } from "./Motion";
@@ -10,6 +10,78 @@ import { Chip, TITLE_SIZE } from "./SectionHeading";
 
 const { products } = HOME;
 const { items } = products;
+type ProductItem = (typeof items)[number];
+
+type ProductCardProps = {
+  item: ProductItem;
+  index: number;
+  sizeClass: string;
+  onEnquire: (event: MouseEvent<HTMLAnchorElement>) => void;
+};
+
+/* Product card */
+function ProductCard({ item, index, sizeClass, onEnquire }: ProductCardProps) {
+  return (
+    <TiltCard max={6} glare={false} className="shrink-0">
+      <article
+        tabIndex={0}
+        className={`group relative overflow-hidden rounded-2xl border border-[#7ee0e6]/20 bg-[#06222c] shadow-[0_24px_50px_-24px_rgba(0,0,0,0.75)] outline-none ${sizeClass}`}
+      >
+        <Photo
+          src={IMG[item.image]}
+          alt={item.title}
+          sizes="(min-width: 1280px) 365px, (min-width: 640px) 330px, 78vw"
+          className="group-hover:scale-110 group-active:scale-110 group-focus-within:scale-110"
+        />
+        <div
+          className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(2,14,20,0.42)_0%,transparent_38%,rgba(2,14,20,0.72)_78%,rgba(2,14,20,0.92)_100%)] transition-opacity duration-500 group-hover:opacity-100 group-active:opacity-100"
+          aria-hidden="true"
+        />
+        <div
+          className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,transparent_32%,rgba(2,18,24,0.94)_100%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-active:opacity-100 group-focus-within:opacity-100 [@media(hover:none)]:opacity-100"
+          aria-hidden="true"
+        />
+        <span className={`${HEADING_FONT_CLASS} pointer-events-none absolute right-4 top-3 text-[52px] font-extrabold leading-none text-transparent [-webkit-text-stroke:1.5px_rgba(126,224,230,0.65)] sm:text-[66px]`}>
+          {String(index + 1).padStart(2, "0")}
+        </span>
+        <p className={`${MONO_FONT_CLASS} pointer-events-none absolute left-4 top-4 rounded-full bg-[linear-gradient(135deg,#0f8f84,#1db37a)] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-white shadow-[0_8px_20px_-8px_rgba(20,184,166,0.9)]`}>
+          {item.category}
+        </p>
+
+        {/* Card caption */}
+        <div className="absolute inset-x-0 bottom-0 z-30 p-3.5 sm:p-5">
+          <div className="flex items-center gap-2.5 sm:gap-3">
+            <NamedIcon
+              name={item.icon}
+              size={32}
+              className="shrink-0 text-[#4fe3c1] transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:rotate-[-8deg] group-active:-translate-y-0.5 group-active:rotate-[-8deg] sm:size-9"
+            />
+            <h3 className={`${HEADING_FONT_CLASS} text-[20px] font-semibold leading-tight tracking-[-0.015em] sm:text-[26px]`}>
+              {item.title}
+            </h3>
+          </div>
+
+          <div className="grid grid-rows-[0fr] opacity-0 transition-all duration-500 ease-out group-hover:grid-rows-[1fr] group-hover:opacity-100 group-active:grid-rows-[1fr] group-active:opacity-100 group-focus-within:grid-rows-[1fr] group-focus-within:opacity-100 [@media(hover:none)]:grid-rows-[1fr] [@media(hover:none)]:opacity-100">
+            <div className="overflow-hidden">
+              <p className="mt-1.5 max-w-[310px] text-[12.5px] leading-[1.45] text-white/85 sm:mt-2.5 sm:text-[14px] sm:leading-[1.55]">
+                {item.text}
+              </p>
+              <a
+                href={products.ctaHref}
+                onPointerDown={(e) => e.stopPropagation()}
+                onClick={onEnquire}
+                className="relative z-30 mt-2.5 inline-flex cursor-pointer items-center gap-2 border-b border-[#4fe3c1] pb-0.5 text-[13px] font-semibold text-[#4fe3c1] transition-[gap,color] duration-300 hover:gap-3 hover:text-[#7ee0e6] active:gap-3 active:text-[#7ee0e6] sm:mt-3.5 sm:text-[14px]"
+              >
+                {products.ctaLabel}
+                <ArrowUpRightIcon size={18} />
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+    </TiltCard>
+  );
+}
 
 /* Horizontal products rail */
 export function ProductsRail() {
@@ -18,6 +90,8 @@ export function ProductsRail() {
   const trackRef = useRef<HTMLDivElement>(null);
   const [max, setMax] = useState(0);
   const [edgePad, setEdgePad] = useState(24);
+  const [mobileIndex, setMobileIndex] = useState(1);
+  const mobileProgress = useMotionValue(1 / items.length);
 
   useEffect(() => {
     let rafId = 0;
@@ -52,6 +126,14 @@ export function ProductsRail() {
   const bar = useTransform(p, [0, 1], [0, 1]);
   const current = useTransform(p, (v) => String(Math.min(items.length, Math.floor(v * items.length) + 1)).padStart(2, "0"));
 
+  const handleMobileScroll = (event: UIEvent<HTMLDivElement>) => {
+    const el = event.currentTarget;
+    const maxScroll = el.scrollWidth - el.clientWidth;
+    const ratio = maxScroll > 0 ? Math.min(1, Math.max(0, el.scrollLeft / maxScroll)) : 0;
+    mobileProgress.set(Math.max(1 / items.length, ratio));
+    setMobileIndex(Math.min(items.length, Math.floor(ratio * (items.length - 1) + 0.5) + 1));
+  };
+
   const handleEnquireClick = (event: MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
     event.stopPropagation();
@@ -70,11 +152,56 @@ export function ProductsRail() {
     <section
       id="products"
       ref={ref}
-      className="relative h-[340svh] bg-[radial-gradient(ellipse_at_80%_15%,#0c4d54_0%,#05222c_48%,#020e14_100%)] text-white sm:h-[380svh] lg:h-[420svh]"
+      className="relative bg-[radial-gradient(ellipse_at_80%_15%,#0c4d54_0%,#05222c_48%,#020e14_100%)] py-9 text-white sm:py-11 lg:h-[420svh] lg:py-0"
     >
+      {/* Mobile & tablet compact horizontal carousel */}
+      <div className="lg:hidden">
+        <div className={`w-full ${PAGE_GUTTER}`}>
+          <div className={`${PAGE_CONTAINER} flex items-end justify-between gap-4`}>
+            <Stagger stagger={0.1}>
+              <StaggerItem>
+                <Chip dark>{products.eyebrow}</Chip>
+              </StaggerItem>
+              <StaggerItem>
+                <h2 className={`${HEADING_FONT_CLASS} ${HEADING_TITLE_MT} max-w-[900px] font-semibold tracking-[-0.015em] ${TITLE_SIZE}`}>
+                  {products.titlePlain} <span className="text-[#7ee0e6]">{products.titleAccent}</span>
+                </h2>
+              </StaggerItem>
+            </Stagger>
+            <p className={`${MONO_FONT_CLASS} hidden shrink-0 text-right text-[12px] uppercase tracking-[0.2em] text-white/60 sm:block`}>
+              <span className="text-[28px] font-semibold leading-none text-[#4fe3c1]">{String(mobileIndex).padStart(2, "0")}</span>
+              <span className="block">/ {String(items.length).padStart(2, "0")}</span>
+            </p>
+          </div>
+        </div>
+
+        <div
+          onScroll={handleMobileScroll}
+          className={`mt-5 flex snap-x snap-mandatory gap-3.5 overflow-x-auto scroll-px-2.5 ${PAGE_GUTTER} pb-1 [scrollbar-width:none] sm:mt-6 sm:gap-5 sm:scroll-px-4 [&::-webkit-scrollbar]:hidden`}
+        >
+          {items.map((item, i) => (
+            <div key={item.id} className="snap-start shrink-0">
+              <ProductCard
+                item={item}
+                index={i}
+                sizeClass="h-[340px] w-[min(78vw,300px)] sm:h-[390px] sm:w-[330px]"
+                onEnquire={handleEnquireClick}
+              />
+            </div>
+          ))}
+        </div>
+
+        <div className={`mt-5 w-full ${PAGE_GUTTER} sm:mt-6`}>
+          <div className={`${PAGE_CONTAINER} h-[3px] overflow-hidden rounded-full bg-white/15`}>
+            <motion.div style={{ scaleX: mobileProgress }} className="h-full origin-left bg-[linear-gradient(90deg,#14b8a6,#7ee0e6)]" />
+          </div>
+        </div>
+      </div>
+
+      {/* Desktop pinned horizontal rail */}
       <div
         ref={viewportRef}
-        className="sticky top-0 flex h-[100svh] flex-col justify-between overflow-hidden pb-[clamp(1rem,2.4svh,2rem)] pt-[clamp(4.6rem,9.5svh,6.4rem)]"
+        className="sticky top-0 hidden h-[100svh] flex-col justify-between overflow-hidden pb-[clamp(1rem,2.4svh,2rem)] pt-[clamp(4.6rem,9.5svh,6.4rem)] lg:flex"
       >
         <div className={`w-full shrink-0 ${PAGE_GUTTER}`}>
           <div className={`${PAGE_CONTAINER} flex items-end justify-between gap-6`}>
@@ -88,87 +215,35 @@ export function ProductsRail() {
                 </h2>
               </StaggerItem>
             </Stagger>
-            <p className={`${MONO_FONT_CLASS} hidden shrink-0 text-right text-[12px] uppercase tracking-[0.2em] text-white/60 sm:block`}>
+            <p className={`${MONO_FONT_CLASS} shrink-0 text-right text-[12px] uppercase tracking-[0.2em] text-white/60`}>
               <motion.span className="text-[30px] font-semibold leading-none text-[#4fe3c1] xl:text-[34px]">{current}</motion.span>
               <span className="block">/ {String(items.length).padStart(2, "0")}</span>
             </p>
           </div>
         </div>
 
-        <div className="mt-3 flex min-h-0 flex-1 items-center sm:mt-4 [perspective:1500px]">
+        <div className="mt-4 flex min-h-0 flex-1 items-center [perspective:1500px]">
           <motion.div
             ref={trackRef}
             style={{ x, paddingLeft: edgePad, paddingRight: edgePad }}
             className="flex h-full w-max items-center"
           >
-            <Stagger stagger={0.08} className="flex h-full w-max items-center gap-4 sm:gap-6">
-            {items.map((item, i) => (
-              <StaggerItem key={item.id} className="flex h-full shrink-0 items-center">
-              <TiltCard max={6} glare={false} className="shrink-0">
-                <article
-                  tabIndex={0}
-                  className="group relative h-[clamp(260px,48svh,480px)] max-h-[calc(100svh-14.5rem)] w-[min(78vw,300px)] overflow-hidden rounded-2xl border border-[#7ee0e6]/20 bg-[#06222c] shadow-[0_24px_50px_-24px_rgba(0,0,0,0.75)] outline-none sm:h-[clamp(320px,54svh,520px)] sm:max-h-[calc(100svh-15rem)] sm:w-[325px] lg:h-[clamp(350px,56svh,550px)] lg:w-[355px] 2xl:w-[400px]"
-                >
-                  <Photo
-                    src={IMG[item.image]}
-                    alt={item.title}
-                    sizes="(min-width: 1280px) 365px, (min-width: 640px) 330px, 74vw"
-                    className="group-hover:scale-110 group-active:scale-110 group-focus-within:scale-110"
+            <Stagger stagger={0.08} className="flex h-full w-max items-center gap-6">
+              {items.map((item, i) => (
+                <StaggerItem key={item.id} className="flex h-full shrink-0 items-center">
+                  <ProductCard
+                    item={item}
+                    index={i}
+                    sizeClass="h-[clamp(350px,56svh,550px)] max-h-[calc(100svh-15rem)] w-[355px] 2xl:w-[400px]"
+                    onEnquire={handleEnquireClick}
                   />
-                  <div
-                    className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(2,14,20,0.42)_0%,transparent_38%,rgba(2,14,20,0.72)_78%,rgba(2,14,20,0.92)_100%)] transition-opacity duration-500 group-hover:opacity-100 group-active:opacity-100"
-                    aria-hidden="true"
-                  />
-                  <div
-                    className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,transparent_32%,rgba(2,18,24,0.94)_100%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-active:opacity-100 group-focus-within:opacity-100 [@media(hover:none)]:opacity-100"
-                    aria-hidden="true"
-                  />
-                  <span className={`${HEADING_FONT_CLASS} pointer-events-none absolute right-4 top-3 text-[52px] font-extrabold leading-none text-transparent [-webkit-text-stroke:1.5px_rgba(126,224,230,0.65)] sm:text-[66px]`}>
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <p className={`${MONO_FONT_CLASS} pointer-events-none absolute left-4 top-4 rounded-full bg-[linear-gradient(135deg,#0f8f84,#1db37a)] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-white shadow-[0_8px_20px_-8px_rgba(20,184,166,0.9)]`}>
-                    {item.category}
-                  </p>
-
-                  {/* Card caption */}
-                  <div className="absolute inset-x-0 bottom-0 z-30 p-3.5 sm:p-5">
-                    <div className="flex items-center gap-2.5 sm:gap-3">
-                      <NamedIcon
-                        name={item.icon}
-                        size={32}
-                        className="shrink-0 text-[#4fe3c1] transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:rotate-[-8deg] group-active:-translate-y-0.5 group-active:rotate-[-8deg] sm:size-9"
-                      />
-                      <h3 className={`${HEADING_FONT_CLASS} text-[20px] font-semibold leading-tight tracking-[-0.015em] sm:text-[26px]`}>
-                        {item.title}
-                      </h3>
-                    </div>
-
-                    <div className="grid grid-rows-[0fr] opacity-0 transition-all duration-500 ease-out group-hover:grid-rows-[1fr] group-hover:opacity-100 group-active:grid-rows-[1fr] group-active:opacity-100 group-focus-within:grid-rows-[1fr] group-focus-within:opacity-100 [@media(hover:none)]:grid-rows-[1fr] [@media(hover:none)]:opacity-100">
-                      <div className="overflow-hidden">
-                        <p className="mt-1.5 max-w-[310px] text-[12.5px] leading-[1.45] text-white/85 sm:mt-2.5 sm:text-[14px] sm:leading-[1.55]">
-                          {item.text}
-                        </p>
-                        <a
-                          href={products.ctaHref}
-                          onPointerDown={(e) => e.stopPropagation()}
-                          onClick={handleEnquireClick}
-                          className="relative z-30 mt-2.5 inline-flex cursor-pointer items-center gap-2 border-b border-[#4fe3c1] pb-0.5 text-[13px] font-semibold text-[#4fe3c1] transition-[gap,color] duration-300 hover:gap-3 hover:text-[#7ee0e6] active:gap-3 active:text-[#7ee0e6] sm:mt-3.5 sm:text-[14px]"
-                        >
-                          {products.ctaLabel}
-                          <ArrowUpRightIcon size={18} />
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </article>
-              </TiltCard>
-              </StaggerItem>
-            ))}
+                </StaggerItem>
+              ))}
             </Stagger>
           </motion.div>
         </div>
 
-        <div className={`mt-4 w-full shrink-0 ${PAGE_GUTTER} sm:mt-5`}>
+        <div className={`mt-5 w-full shrink-0 ${PAGE_GUTTER}`}>
           <div className={`${PAGE_CONTAINER} h-[3px] overflow-hidden rounded-full bg-white/15`}>
             <motion.div style={{ scaleX: bar }} className="h-full origin-left bg-[linear-gradient(90deg,#14b8a6,#7ee0e6)]" />
           </div>

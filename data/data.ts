@@ -69,11 +69,11 @@ export const HOME = {
 export const PAGE_MAX_WIDTH = 1560;
 export const PAGE_GUTTER = "px-2.5 sm:px-4 xl:px-6";
 export const PAGE_CONTAINER = "mx-auto w-full max-w-[1560px]";
-export const PAGE_SECTION_TOP = "pt-[clamp(3rem,6.5svh,5.5rem)]";
-export const PAGE_SECTION_Y = "py-[clamp(3rem,6.5svh,5.5rem)]";
-export const HEADING_TO_CONTENT = "mt-[clamp(1.75rem,4svh,3.5rem)]";
-export const HEADING_TITLE_MT = "mt-[clamp(0.65rem,1.5svh,1.15rem)]";
-export const HEADING_TEXT_MT = "mt-[clamp(0.65rem,1.6svh,1.25rem)]";
+export const PAGE_SECTION_TOP = "pt-[clamp(2.25rem,5.5svh,5.5rem)]";
+export const PAGE_SECTION_Y = "py-[clamp(2.25rem,5.5svh,5.5rem)]";
+export const HEADING_TO_CONTENT = "mt-[clamp(1.5rem,3.6svh,3.5rem)]";
+export const HEADING_TITLE_MT = "mt-[clamp(0.55rem,1.4svh,1.15rem)]";
+export const HEADING_TEXT_MT = "mt-[clamp(0.55rem,1.4svh,1.25rem)]";
 
 /* Contact link helper */
 export const contactHref = (icon: string, value: string) => {
