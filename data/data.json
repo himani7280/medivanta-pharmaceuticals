@@ -1,0 +1,620 @@
+{
+  "MediVanta": {
+    "fonts": {
+      "stylesheet": "https://fonts.googleapis.com/css2?family=Agrave+Pro:wght@400..700&family=JetBrains+Mono:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap",
+      "classes": {
+        "heading": "font-['Agrave_Pro',cursive,sans-serif]",
+        "body": "font-['Poppins',system-ui,sans-serif]",
+        "mono": "font-['JetBrains_Mono',ui-monospace,monospace]",
+        "script": "font-['Agrave_Pro',cursive,sans-serif]"
+      },
+      "variables": {
+        "--font-heading": "'Agrave Pro', cursive, sans-serif",
+        "--font-body": "'Poppins', system-ui, sans-serif",
+        "--font-mono": "'JetBrains Mono', ui-monospace, monospace",
+        "--font-script": "'Agrave Pro', cursive, sans-serif"
+      }
+    },
+    "templateComponents": {
+      "template-1": {
+        "shared": {
+          "Header": "MediVantaSiteChrome1",
+          "Footer": "MediVantaSiteChrome1"
+        },
+        "pages": {
+          "home": {
+            "components": [
+              {
+                "key": "Hero",
+                "component": "MediVantaHomeHero1"
+              },
+              {
+                "key": "About",
+                "component": "MediVantaAbout1"
+              },
+              {
+                "key": "Products",
+                "component": "MediVantaProducts1"
+              },
+              {
+                "key": "HowItWorks",
+                "component": "MediVantaHowItWorks1"
+              },
+              {
+                "key": "Research",
+                "component": "MediVantaResearch1"
+              },
+              {
+                "key": "Quality",
+                "component": "MediVantaQuality1"
+              },
+              {
+                "key": "Partners",
+                "component": "MediVantaPartners1"
+              },
+              {
+                "key": "Contact",
+                "component": "MediVantaContact1"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "sections": {
+      "SiteChromeContent": {
+        "variants": {
+          "MediVantaSiteChrome1": {
+            "metadata": {
+              "title": "MediVanta Pharmaceuticals | Healthier Today. Brighter Tomorrow.",
+              "description": "MediVanta Pharmaceuticals is a research-driven, WHO-GMP certified manufacturer of high-quality, affordable medicines serving patients and healthcare partners in over 40 countries."
+            },
+            "brand": {
+              "name": "MediVanta Pharmaceuticals",
+              "tagline": "Healthier Today. Brighter Tomorrow.",
+              "about": "A research-driven pharmaceutical company delivering safe, effective and affordable medicines to patients and healthcare partners worldwide.",
+              "phone": "+1 00000 00000",
+              "email": "info@xyz.com",
+              "address": "450 Lexington Avenue, Suite 1200, New York, NY 10017, USA"
+            },
+            "header": {
+              "homeAriaLabel": "MediVanta home",
+              "openMenuLabel": "Open menu",
+              "closeMenuLabel": "Close menu",
+              "closeNavLabel": "Close navigation",
+              "navAriaLabel": "Main",
+              "mobileNavAriaLabel": "Mobile navigation",
+              "navLinks": [
+                {
+                  "id": "nav-home",
+                  "label": "Home",
+                  "href": "#home"
+                },
+                {
+                  "id": "nav-about",
+                  "label": "About",
+                  "href": "#about"
+                },
+                {
+                  "id": "nav-products",
+                  "label": "Our Products",
+                  "href": "#products"
+                },
+                {
+                  "id": "nav-process",
+                  "label": "How It Works",
+                  "href": "#process"
+                },
+                {
+                  "id": "nav-research",
+                  "label": "Innovation & R&D",
+                  "href": "#research"
+                },
+                {
+                  "id": "nav-quality",
+                  "label": "Quality",
+                  "href": "#quality"
+                },
+                {
+                  "id": "nav-partners",
+                  "label": "Partners",
+                  "href": "#partners"
+                }
+              ],
+              "cta": {
+                "label": "Get In Touch",
+                "href": "#contact"
+              },
+              "quickActions": {
+                "callLabel": "Call us",
+                "emailLabel": "Email"
+              }
+            },
+            "scrollToTop": {
+              "ariaLabel": "Scroll back to top",
+              "title": "Back to top"
+            },
+            "footer": {
+              "quickLinksTitle": "Company",
+              "contactTitle": "Contact",
+              "quickLinks": [
+                {
+                  "id": "footer-home",
+                  "label": "Home",
+                  "href": "#home"
+                },
+                {
+                  "id": "footer-about",
+                  "label": "About",
+                  "href": "#about"
+                },
+                {
+                  "id": "footer-products",
+                  "label": "Our Products",
+                  "href": "#products"
+                },
+                {
+                  "id": "footer-process",
+                  "label": "How It Works",
+                  "href": "#process"
+                },
+                {
+                  "id": "footer-research",
+                  "label": "Innovation & R&D",
+                  "href": "#research"
+                },
+                {
+                  "id": "footer-quality",
+                  "label": "Quality",
+                  "href": "#quality"
+                },
+                {
+                  "id": "footer-partners",
+                  "label": "Partners",
+                  "href": "#partners"
+                }
+              ],
+              "socials": [
+                {
+                  "id": "social-linkedin",
+                  "key": "linkedin",
+                  "label": "LinkedIn",
+                  "href": "https://www.linkedin.com"
+                },
+                {
+                  "id": "social-facebook",
+                  "key": "facebook",
+                  "label": "Facebook",
+                  "href": "https://www.facebook.com"
+                },
+                {
+                  "id": "social-instagram",
+                  "key": "instagram",
+                  "label": "Instagram",
+                  "href": "https://www.instagram.com"
+                },
+                {
+                  "id": "social-youtube",
+                  "key": "youtube",
+                  "label": "YouTube",
+                  "href": "https://www.youtube.com"
+                }
+              ],
+              "copyright": "Copyright © 2026 MediVanta Pharmaceuticals. All Rights Reserved.",
+              "designedBy": "Designed by Lestow"
+            }
+          }
+        }
+      },
+      "Media": {
+        "variants": {
+          "MediVantaImages1": {
+            "images": {
+              "logo": "/images/logo.webp",
+              "logoLight": "/images/logo-light.webp",
+              "aboutLab": "/images/about-lab.webp",
+              "aboutPipette": "/images/about-pipette.webp",
+              "tablets": "/images/product-tablets.webp",
+              "capsules": "/images/product-capsules.webp",
+              "blister": "/images/product-blister.webp",
+              "liquid": "/images/product-liquid.webp",
+              "injectables": "/images/product-injectables.webp",
+              "diagnostics": "/images/product-diagnostics.webp",
+              "oncology": "/images/product-oncology.webp",
+              "wellness": "/images/product-wellness.webp",
+              "rdMain": "/images/rd-main.webp",
+              "rdGlass": "/images/rd-glass.webp",
+              "quality": "/images/quality.webp",
+              "contact": "/images/contact.webp",
+              "heroVials": "/images/hero-vials.webp",
+              "partner1": "/images/partner-1.webp",
+              "partner2": "/images/partner-2.webp",
+              "partner3": "/images/partner-3.webp"
+            }
+          }
+        }
+      },
+      "Hero": {
+        "variants": {
+          "MediVantaHomeHero1": {
+            "line1Plain": "Trusted",
+            "line1Accent": "Science.",
+            "line2Plain": "Healthier",
+            "line2Accent": "Lives.",
+            "image": "heroVials",
+            "imageAlt": "Sterile clear glass pharmaceutical ampoules and vials illuminated in teal studio lighting",
+            "primary": {
+              "label": "Explore Products",
+              "href": "#products"
+            }
+          }
+        }
+      },
+      "About": {
+        "variants": {
+          "MediVantaAbout1": {
+            "eyebrow": "About MediVanta",
+            "titleLine1": "Advancing health through",
+            "titleAccent": "science and care",
+            "text": "For over fifteen years MediVanta has combined rigorous research with world-class manufacturing to bring reliable medicines within reach. Every batch is made with one promise: patient safety first.",
+            "image": "aboutLab",
+            "imageAlt": "Scientist working at a microscope in the laboratory",
+            "inset": "aboutPipette",
+            "insetAlt": "Researcher loading samples with a pipette",
+            "badge": {
+              "value": 15,
+              "suffix": "+",
+              "label": "Years of excellence"
+            },
+            "points": [
+              {
+                "id": "about-safety",
+                "icon": "shield",
+                "title": "Patient safety first",
+                "text": "Every formulation is validated through multi-stage safety testing."
+              },
+              {
+                "id": "about-research",
+                "icon": "flask",
+                "title": "Research driven",
+                "text": "In-house scientists develop and improve therapies continuously."
+              },
+              {
+                "id": "about-global",
+                "icon": "globe",
+                "title": "Global reach",
+                "text": "Trusted by hospitals and distributors across 40+ countries."
+              }
+            ]
+          }
+        }
+      },
+      "Products": {
+        "variants": {
+          "MediVantaProducts1": {
+            "eyebrow": "Our Products",
+            "titlePlain": "Medicines for every",
+            "titleAccent": "stage of care",
+            "text": "A broad, growing portfolio across dosage forms and therapeutic areas, manufactured to the strictest global standards.",
+            "ctaLabel": "Enquire now",
+            "ctaHref": "#contact",
+            "items": [
+              {
+                "id": "product-tablets",
+                "title": "Tablets",
+                "category": "Solid Dose",
+                "text": "Coated and uncoated tablets for chronic and acute conditions.",
+                "image": "tablets",
+                "icon": "pill"
+              },
+              {
+                "id": "product-capsules",
+                "title": "Capsules",
+                "category": "Solid Dose",
+                "text": "Hard and soft gelatin capsules with precise dosing.",
+                "image": "capsules",
+                "icon": "capsule"
+              },
+              {
+                "id": "product-blister",
+                "title": "Blister Packs",
+                "category": "Solid Dose",
+                "text": "Tamper-proof, moisture-safe strips and unit-dose packs.",
+                "image": "blister",
+                "icon": "shield"
+              },
+              {
+                "id": "product-liquids",
+                "title": "Oral Liquids",
+                "category": "Liquids & Injectables",
+                "text": "Syrups, suspensions and drops with stable, pleasant formulations.",
+                "image": "liquid",
+                "icon": "drop"
+              },
+              {
+                "id": "product-injectables",
+                "title": "Injectables",
+                "category": "Liquids & Injectables",
+                "text": "Sterile vials and ampoules produced in controlled cleanrooms.",
+                "image": "injectables",
+                "icon": "syringe"
+              },
+              {
+                "id": "product-diagnostics",
+                "title": "Diagnostics",
+                "category": "Specialty",
+                "text": "Reagents and assay kits that support fast, accurate testing.",
+                "image": "diagnostics",
+                "icon": "flask"
+              },
+              {
+                "id": "product-oncology",
+                "title": "Oncology",
+                "category": "Specialty",
+                "text": "Targeted, high-potency therapies developed with clinical partners.",
+                "image": "oncology",
+                "icon": "dna"
+              },
+              {
+                "id": "product-nutraceuticals",
+                "title": "Nutraceuticals",
+                "category": "Solid Dose",
+                "text": "Science-backed supplements for everyday wellness.",
+                "image": "wellness",
+                "icon": "leaf"
+              }
+            ]
+          }
+        }
+      },
+      "HowItWorks": {
+        "variants": {
+          "MediVantaHowItWorks1": {
+            "eyebrow": "How We Work",
+            "titlePlain": "From the lab",
+            "titleAccent": "to life",
+            "text": "Five controlled stages guarantee that every dose that leaves our facility is safe, consistent and traceable.",
+            "steps": [
+              {
+                "id": "process-research",
+                "icon": "microscope",
+                "title": "Research",
+                "text": "Discover and validate the right molecule."
+              },
+              {
+                "id": "process-formulation",
+                "icon": "flask",
+                "title": "Formulation",
+                "text": "Design a stable, effective dosage form."
+              },
+              {
+                "id": "process-manufacturing",
+                "icon": "factory",
+                "title": "Manufacturing",
+                "text": "Produce in automated, GMP-grade lines."
+              },
+              {
+                "id": "process-quality",
+                "icon": "shield",
+                "title": "Quality Control",
+                "text": "Test every batch at multiple checkpoints."
+              },
+              {
+                "id": "process-distribution",
+                "icon": "truck",
+                "title": "Distribution",
+                "text": "Deliver on time with cold-chain traceability."
+              }
+            ]
+          }
+        }
+      },
+      "Research": {
+        "variants": {
+          "MediVantaResearch1": {
+            "eyebrow": "Innovation & R&D",
+            "titleLine1": "Where discovery becomes",
+            "titleAccent": "a cure",
+            "text": "Our research centre brings together formulation scientists, analysts and clinicians to turn promising molecules into safe, stable and affordable medicines.",
+            "image": "rdMain",
+            "imageAlt": "Researcher operating automated laboratory equipment",
+            "glass": "rdGlass",
+            "glassAlt": "Laboratory glassware",
+            "items": [
+              {
+                "id": "rd-screening",
+                "icon": "dna",
+                "title": "Molecule screening",
+                "text": "High-throughput analysis to find the most promising compounds."
+              },
+              {
+                "id": "rd-formulation",
+                "icon": "flask",
+                "title": "Formulation lab",
+                "text": "Stable, bioavailable dosage forms designed for real patients."
+              },
+              {
+                "id": "rd-clinical",
+                "icon": "microscope",
+                "title": "Clinical support",
+                "text": "Trial-ready batches and data packages for regulatory filings."
+              },
+              {
+                "id": "rd-patents",
+                "icon": "award",
+                "title": "Patents & filings",
+                "text": "An expanding IP portfolio protecting every breakthrough."
+              }
+            ]
+          }
+        }
+      },
+      "Quality": {
+        "variants": {
+          "MediVantaQuality1": {
+            "eyebrow": "Quality & Compliance",
+            "titleLine1": "Zero compromise on",
+            "titleAccent": "quality",
+            "text": "Our facilities are audited regularly and run on digital quality systems that track each batch from raw material to the pharmacy shelf.",
+            "image": "quality",
+            "imageAlt": "Quality control laboratory with analytical instruments",
+            "badges": [
+              {
+                "id": "badge-who-gmp",
+                "icon": "check",
+                "title": "WHO-GMP",
+                "text": "Certified manufacturing"
+              },
+              {
+                "id": "badge-iso-9001",
+                "icon": "award",
+                "title": "ISO 9001",
+                "text": "Quality management"
+              },
+              {
+                "id": "badge-usfda",
+                "icon": "shield",
+                "title": "USFDA",
+                "text": "Compliant processes"
+              },
+              {
+                "id": "badge-iso-14001",
+                "icon": "leaf",
+                "title": "ISO 14001",
+                "text": "Responsible operations"
+              }
+            ],
+            "stats": [
+              {
+                "id": "stat-formulations",
+                "icon": "pill",
+                "value": 300,
+                "suffix": "+",
+                "label": "Formulations"
+              },
+              {
+                "id": "stat-countries",
+                "icon": "globe",
+                "value": 40,
+                "suffix": "+",
+                "label": "Countries"
+              },
+              {
+                "id": "stat-team",
+                "icon": "users",
+                "value": 1200,
+                "suffix": "+",
+                "label": "Team members"
+              },
+              {
+                "id": "stat-awards",
+                "icon": "award",
+                "value": 25,
+                "suffix": "+",
+                "label": "Quality awards"
+              }
+            ]
+          }
+        }
+      },
+      "Partners": {
+        "variants": {
+          "MediVantaPartners1": {
+            "eyebrow": "Partner Voices",
+            "titlePlain": "Trusted by",
+            "titleAccent": "healthcare leaders",
+            "text": "Doctors, hospitals and distributors share what it is like to work with MediVanta.",
+            "rating": {
+              "score": "4.9/5",
+              "label": "Partner rating",
+              "starsAria": "5 out of 5 stars"
+            },
+            "controls": {
+              "prevLabel": "Previous",
+              "nextLabel": "Next",
+              "tablistLabel": "Partner voices"
+            },
+            "items": [
+              {
+                "id": "partner-arjun-rao",
+                "quote": "MediVanta's batches arrive on time, every time, with documentation that passes our audits without a single query. They are a dependable partner.",
+                "name": "Dr. Arjun Rao",
+                "role": "Chief Pharmacist, City Care Hospital",
+                "avatar": "partner1",
+                "image": "partner1",
+                "imageAlt": "Dr. Arjun Rao, Chief Pharmacist at City Care Hospital"
+              },
+              {
+                "id": "partner-maya-okafor",
+                "quote": "Their R&D team helped us shorten a formulation project by months. The science is solid and the communication is excellent.",
+                "name": "Dr. Maya Okafor",
+                "role": "Head of Clinical Operations",
+                "avatar": "partner2",
+                "image": "partner2",
+                "imageAlt": "Dr. Maya Okafor, Head of Clinical Operations"
+              },
+              {
+                "id": "partner-daniel-hughes",
+                "quote": "We distribute MediVanta across three regions. Consistent quality and fair pricing keep our customers coming back.",
+                "name": "Daniel Hughes",
+                "role": "Regional Distributor",
+                "avatar": "partner3",
+                "image": "partner3",
+                "imageAlt": "Daniel Hughes, Regional Distributor"
+              }
+            ]
+          }
+        }
+      },
+      "Contact": {
+        "variants": {
+          "MediVantaContact1": {
+            "eyebrow": "Get In Touch",
+            "titlePlain": "Let's work",
+            "titleAccent": "together",
+            "text": "Reach out to our team anytime.",
+            "directTitlePlain": "Direct",
+            "directTitleAccent": "Contact",
+            "image": "contact",
+            "imageAlt": "Stethoscope and medicines on a clean surface",
+            "cards": [
+              {
+                "id": "contact-office",
+                "icon": "pin",
+                "title": "Head Office",
+                "value": "450 Lexington Avenue, Suite 1200, New York, NY 10017, USA"
+              },
+              {
+                "id": "contact-phone",
+                "icon": "phone",
+                "title": "Call Us",
+                "value": "+1 00000 00000"
+              },
+              {
+                "id": "contact-email",
+                "icon": "mail",
+                "title": "Email Us",
+                "value": "info@xyz.com"
+              }
+            ],
+            "form": {
+              "title": "Send an enquiry",
+              "subtitle": "Share your requirement and our team will reply within one working day.",
+              "fields": {
+                "name": "Full name",
+                "email": "Work email",
+                "phone": "Phone number",
+                "message": "How can we help?"
+              },
+              "sending": "Sending",
+              "submit": "Send Enquiry",
+              "successTitle": "Enquiry sent!",
+              "success": "Thank you! Our team will contact you within one working day.",
+              "resetLabel": "Send another enquiry"
+            }
+          }
+        }
+      }
+    }
+  }
+}
